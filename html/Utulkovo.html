@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Útulkovo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        header {
+            background-color: #ffffff;
+            padding: 15px 20px;
+            border-bottom: 2px solid #ccc;
+        }
+
+        .nav-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+            .logo-area img {
+                height: 40px;
+                width: auto;
+            }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        nav button {
+            background: none;
+            border: none;
+            font-size: 15px;
+            cursor: pointer;
+            padding: 5px;
+            font-family: inherit;
+        }
+
+            nav button.active {
+                font-weight: bold;
+                text-decoration: underline;
+            }
+
+        main {
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 0 15px;
+        }
+
+        .view {
+            display: none;
+        }
+
+            .view.active {
+                display: block;
+            }
+
+        /* Home stránka */
+        .hero {
+            background-color: #e2e2e2;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+        }
+
+        .btn {
+            padding: 8px 15px;
+            background-color: #333;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin: 5px;
+            border-radius: 4px;
+        }
+
+        .btn-outline {
+            background-color: white;
+            color: #333;
+            border: 1px solid #333;
+        }
+
+        /* Stránka katalógu */
+        .catalogue-container {
+            display: flex;
+            gap: 20px;
+        }
+
+        aside {
+            width: 220px;
+            background: white;
+            padding: 15px;
+            border: 1px solid #ccc;
+            height: fit-content;
+        }
+
+        .filter-group {
+            margin-bottom: 15px;
+        }
+
+            .filter-group label {
+                display: block;
+                font-weight: bold;
+                margin-bottom: 5px;
+            }
+
+        .cards-grid {
+            flex: 1;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .card {
+            width: calc(50% - 10px);
+            background: white;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        .card-img-placeholder {
+            height: 140px;
+            background-color: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid #ccc;
+            font-weight: bold;
+            color: #666;
+        }
+
+        .card-body {
+            padding: 10px;
+        }
+
+            .card-body h3 {
+                margin: 0 0 5px 0;
+            }
+
+        .card-info {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .pagination {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+            .pagination button {
+                padding: 5px 10px;
+                margin: 2px;
+            }
+
+        footer {
+            background-color: #ffffff;
+            border-top: 1px solid #ccc;
+            text-align: center;
+            padding: 15px;
+            margin-top: 30px;
+            font-size: 14px;
+        }
+
+        /* Responzivita pre mobily vygenerované cez AI */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 8px;
+                width: 100%;
+            }
+
+            nav button {
+                width: 100%;
+                padding: 8px;
+            }
+
+            .catalogue-container {
+                flex-direction: column;
+            }
+
+            aside {
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            .card {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <div class="logo-area">
+                <img src="logo.jpeg" alt="Logo Útulkovo">
+                <strong>ÚTULKOVO</strong>
+            </div>
+            <nav>
+                <ul>
+                    <li><button class="nav-btn active" onclick="showPage('home')">Úvod</button></li>
+                    <li><button class="nav-btn" onclick="showPage('catalogue')">Zvieratá</button></li>
+                    <li><button class="nav-btn" disabled style="opacity:0.4; cursor:not-allowed;">Ako pomôcť</button></li>
+                    <li><button class="nav-btn" disabled style="opacity:0.4; cursor:not-allowed;">O útulku</button></li>
+                    <li><button class="nav-btn" disabled style="opacity:0.4; cursor:not-allowed;">Kontakt</button></li>
+                </ul>
+            </nav>
+            <button class="btn">Prihlásiť sa</button>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- STRÁNKA 1: ÚVOD (DOMOV) text vygenerovaný cez AI-->
+        <section id="page-home" class="view active">
+            <div class="hero">
+                <small style="letter-spacing: 1px; font-weight: bold;">ADOPTUJ NEKUPUJ</small>
+                <h1>Každý z nich čaká na svoj domov.</h1>
+                <p>Pomôžte nám nájsť bezpečný a láskavý domov zvieratám, ktoré dostali druhú šancu</p>
+                <button class="btn" onclick="showPage('catalogue')">Nájsť zviera</button>
+                <button class="btn btn-outline">Ako môžem pomôcť</button>
+            </div>
+
+            <h2>HĽADAJÚ DOMOV</h2>
+            <p>Zoznámte sa s nimi</p>
+            <br>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-img-placeholder">[ FOTO REX ]</div>
+                    <div class="card-body">
+                        <h3>Benny</h3>
+                        <div class="card-info">PES - SAMEC</div>
+                        <p>PLACEHOLDER</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-img-placeholder">[ FOTO LUNA ]</div>
+                    <div class="card-body">
+                        <h3>Luna</h3>
+                        <div class="card-info">MAČKA - SAMICA</div>
+                        <p>PLACEHOLDER</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- STRÁNKA 2: KATALÓG ZVIERAT -->
+        <section id="page-catalogue" class="view">
+            <div style="margin-bottom: 20px;">
+                <h1>Zvieratá na adopciu</h1>
+                <p>Spoznajte zvieratá, ktoré sú pripravené stať sa súčasťou vašej rodiny</p>
+            </div>
+
+            <div class="catalogue-container">
+
+                <aside>
+                    <h3>Filtrovať</h3>
+                    <br>
+                    <div class="filter-group">
+                        <input type="text" placeholder="Hľadať..." style="width: 100%; padding: 5px; box-sizing: border-box;">
+                    </div>
+
+                    <div class="filter-group">
+                        <label>Druh zvierata</label>
+                        <input type="radio" name="druh" checked> Všetky<br>
+                        <input type="radio" name="druh"> Pes<br>
+                        <input type="radio" name="druh"> Mačka
+                    </div>
+
+                    <div class="filter-group">
+                        <label>Vek</label>
+                        <input type="radio" name="vek" checked> Všetky<br>
+                        <input type="radio" name="vek"> Mláďa<br>
+                        <input type="radio" name="vek"> Dospelý
+                    </div>
+
+                    <div class="filter-group">
+                        <label>Pohlavie</label>
+                        <input type="radio" name="pohlavie" checked> Všetky<br>
+                        <input type="radio" name="pohlavie"> Samec<br>
+                        <input type="radio" name="pohlavie"> Samica
+                    </div>
+
+                    <button class="btn btn-outline" style="width: 100%;">Filtrovať</button>
+                </aside>
+
+                <div style="flex: 1;">
+                    <div class="cards-grid">
+                        <div class="card">
+                            <div class="card-img-placeholder">[ FOTO BENNY ]</div>
+                            <div class="card-body">
+                                <h3>Benny</h3>
+                                <div class="card-info">PES - SAMEC</div>
+                                <p>PLACEHOLDER</p>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-img-placeholder">[ FOTO LUNA ]</div>
+                            <div class="card-body">
+                                <h3>Luna</h3>
+                                <div class="card-info">MAČKA - SAMICA</div>
+                                <p>PLACEHOLDER</p>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-img-placeholder">[ FOTO RONY ]</div>
+                            <div class="card-body">
+                                <h3>Rony</h3>
+                                <div class="card-info">PES - SAMEC</div>
+                                <p>PLACEHOLDER</p>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-img-placeholder">[ FOTO MIA ]</div>
+                            <div class="card-body">
+                                <h3>Mia</h3>
+                                <div class="card-info">MAČKA - SAMICA</div>
+                                <p>PLACEHOLDER</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pagination">
+                        <button>&laquo;</button>
+                        <button class="btn" style="padding: 5px 10px; margin: 0;">1</button>
+                        <button>2</button>
+                        <button>&raquo;</button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Úvod | Zvieratá | Ako pomôcť | O útulku | Kontakt | Prihlásiť sa</p>
+    </footer>
+
+    <!-- Prepínanie stránok vygenerovné cez AI -->
+    <script>
+        function showPage(pageId) {
+            document.querySelectorAll('.view').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
+
+            if (pageId === 'home') {
+                document.getElementById('page-home').classList.add('active');
+                document.querySelectorAll('.nav-btn')[0].classList.add('active');
+            } else if (pageId === 'catalogue') {
+                document.getElementById('page-catalogue').classList.add('active');
+                document.querySelectorAll('.nav-btn')[1].classList.add('active');
+            }
+        }
+    </script>
+
+</body>
+</html>
